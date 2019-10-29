@@ -1,0 +1,48 @@
+.max-h-400 {
+  max-height: 400px
+}
+
+.min-h-100 {
+  min-height: 100px
+}
+.pb-100 {
+  padding-bottom: 100px !important;
+}
+
+.bg-secondcolor {
+  background-color: $bg-third;
+}
+.border-t-black {
+  border-top: 1px solid #e6e6e6;
+}
+.bg-menu-2 {
+  background-color: $bg-menu-2;
+}
+.bg-topic-1 {
+  background-color: $bg-topic-1;
+}
+tr.selected td {
+  background-color: #cfd8dc !important;
+}
+.bg-yellow-light {
+  background-color: $bg-yellow-light;
+}
+
+.bg-light-blue {
+  background-color: $bg-light-blue;
+}
+
+.link {
+  cursor: pointer;
+  &:hover {
+    color: #007bff;;
+  }
+}
+
+select.disabled {
+  -moz-appearance:none; /* Firefox */
+  -webkit-appearance:none; /* Safari and Chrome */
+  appearance:none;
+  border: none;
+  background-color: transparent !important;
+}

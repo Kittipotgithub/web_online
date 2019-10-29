@@ -1,0 +1,21 @@
+@import "variables.scss";
+.header {
+  min-height: 30px;
+  background-color: #cfe5f2;
+  display: flex;
+  height: $header-height;
+  .head-left {
+    background: url('assets/images/img_headers/header_section_01.jpg');
+    min-height: $header-height;
+    width: $size-menu;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .head-right {
+    background: url('assets/images/img_headers/header_theme03.jpg');
+    min-height: $header-height;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+}

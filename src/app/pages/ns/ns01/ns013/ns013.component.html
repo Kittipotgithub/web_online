@@ -1,0 +1,69 @@
+<div class="content-box">
+  <div class="content-detail">
+    <div class="content-border">
+      <span class="topic-header"> <label class="text-black"> กลับรายการ </label> </span>
+      <!-- <form [formGroup]="bc013FormReverse"> -->
+        <div class="row">
+          <div class="col-md-2"><label class="text-black"> ชื่อเอกสาร </label></div>
+          <div class="col-md-2"> <p class="text-dark-grey"> ใบกลับรายการบัญชี </p> </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2"><label class="text-black"> รหัสหน่วยงาน </label></div>
+          <div class="col-md-2">
+            <input class="form-control input-none-border" type="hidden" />
+            <p>{{ userProfile?.userdata?.departmentName }}</p>
+          </div>
+          <div class="col-md-2"><span class=" text-underline-red"> 	เลขที่ใบจัดเก็บรายได้ </span></div>
+          <div class="col-md-6">
+            <div class="d-flex input-with-year">
+              <input class="form-control " type="text" class="mr-2" maxlength="10"/>
+              <span class=" text-underline-blue mr-2"> ปีงบประมาณ</span>
+              <select>
+                <option *ngFor="let item of constant.LIST_YEAR" [ngValue]="item.id">{{ item.name }}</option>
+              </select>
+              <button class="w-100">แสดงเอกสาร</button>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2"><label class="text-black"> รหัสพื้นที่ </label></div>
+          <div class="col-md-2">
+            <select class="form-control disabled" >
+              <option *ngFor="let item of constant.LIST_AREA_CODE" [ngValue]="item.id">{{ item.name }}</option>
+            </select>
+          </div>
+          <div class="col-md-2"><span class=" text-underline-blue"> วันที่ผ่านรายการ</span></div>
+          <div class="col-md-2">
+            <mat-form-field class="d-flex">
+              <input readonly class="form-control date-mat-input" matInput [matDatepicker]="typeSearchConditionDateFrom" />
+              <mat-datepicker-toggle matSuffix [for]="typeSearchConditionDateFrom"></mat-datepicker-toggle>
+              <mat-datepicker #typeSearchConditionDateFrom [calendarHeaderComponent]="datePickerHeader"></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2"><label class="text-black"> รหัสหน่วยเบิกจ่าย </label></div>
+          <div class="col-md-2">
+            <input class="form-control input-none-border" type="hidden" />
+            <p>{{ userProfile?.userdata?.divisionName }}</p>
+          </div>
+          <div class="col-md-2"><span class=" text-underline-red"> เหตุผลในการกลับรายการ</span></div>
+          <div class="col-md-4">
+            <select class="form-control" >
+              <option *ngFor="let item of constant.LIST_REASON_BACK_LIST" [ngValue]="item.id">{{ item.name }}</option>
+            </select>
+          </div>
+        </div>
+        <ul style="color:red">
+          <li *ngFor="let c of listValidate">{{ c }}</li>
+        </ul>
+        <div class="row mx-auto mt-4 border-t-black">
+          <div class="mx-auto">
+            <button type="button" class="btn-success" (click)="submitReverse()">กลับรายการ</button>
+          </div>
+        </div>
+      <!-- </form> -->
+    </div>
+  </div>
+</div>
+<app-loading class="backdrop-loading" [isLoading]="isLoading"></app-loading>

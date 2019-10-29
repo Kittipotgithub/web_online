@@ -1,0 +1,418 @@
+<div class="content-menu-top">
+  <app-head-content></app-head-content>
+  <div class="topic">
+    <h4>บันทึกรายการ</h4>
+    <span> สร้าง/บันทึก/ค้นหา/เปลี่ยนแปลง เอกสาร </span>
+  </div>
+</div>
+<div class="menu-page">
+  <div class="d-flex menu-list">
+    <div class="menu-img">
+      <img src="assets/images/img_menuItems/menuitem6.jpg" alt="" />
+    </div>
+    <div class="menu-desc">
+      <div class="pointer" data-toggle="collapse" href="#menu1">
+        <p>ระบบการบริหารงบประมาณ</p>
+        <span> สำรองเงิน,แผนการใช้จ่ายงบประมาณในปี และแผนการใช้จ่ายงบประมาณเกินปี </span>
+      </div>
+      <div class="collapse" id="menu1">
+        <ul>
+          <li>
+            <p data-toggle="collapse" href="#menu1-1">» สำรองเงิน</p>
+            <ul class="collapse" id="menu1-1">
+              <li><a routerLink="/sng01"> สง01» สำรองเงิน </a></li>
+              <li><a routerLink="/sng02"> สง02» รายการเอกสารสำรองเงินที่ขอกันเงินไว้เบิกเหลื่อมปี/ขยายเวลาเบิกจ่าย (List) (สง.02)</a></li>
+              <li><a routerLink="/sng03"> สง03» การยกเลิกเอกสารสำรองเงินที่ขอกันเงินไว้เบิกเหลื่อมปี/ขยายเวลาเบิกจ่าย (List Cancel) (สง.03)</a></li>
+              <!-- <li><a routerLink="/sng04"> สง04» ลดยอดสำรองเงิน </a></li> -->
+            </ul>
+          </li>
+          <li>
+            <p data-toggle="collapse" href="#menu1-2">» อนุมัติรายการเอกสารสำรองเงิน</p>
+            <ul class="collapse" id="menu1-2">
+              <li><a routerLink="/op01"> อพ. 01 อนุมัติการขอกันเงิน / ขยายเวลาเบิกจ่ายเงิน </a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex menu-list">
+    <div class="menu-img">
+      <img src="assets/images/img_menuItems/menuitem1.jpg" alt="" />
+    </div>
+    <div class="menu-desc">
+      <div class="pointer" data-toggle="collapse" href="#menu2">
+        <p>ระบบจัดซื้อจัดจ้าง</p>
+        <span> ข้อมูลหลักผู้ขาย,สั่งซื้อ/จ้าง/เช่า,ตรวจรับพัสดุ,สัญญา และกระบวนงานขยายเวลาเบิกเจ่ายและกันเงินเหลื่อมปี </span>
+      </div>
+      <div class="collapse" id="menu2">
+        <ul>
+          <li>
+            <p data-toggle="collapse" href="#menu2-1">» ข้อมูลหลักผู้ขาย</p>
+            <ul class="collapse" id="menu2-1">
+              <li>
+                <a routerLink="/pk01"> ผข01 » ข้อมูลหลักผู้ขาย » </a>
+                <a [routerLink]="['/report-tail', 'pk01']" target="_blank"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p data-toggle="collapse" href="#menu2-2">» บันทึกรายการสั่งซื้อ/จ้าง/เช่า</p>
+            <ul class="collapse" id="menu2-2">
+              <li>
+                <a routerLink="/bs01"> บส01 » สั่งซื้อ/จ้าง/เช่า » </a>
+                <a [routerLink]="['/report-tail', 'bs01']" target="_blank"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+              <li>
+                <a routerLink="/bs04"> บส04 » สั่งซื้อ/จ้าง/เช่า ประเภทการส่งมอบไม่แน่นอน » </a>
+                <a [routerLink]="['/report-tail', 'bs04']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p data-toggle="collapse" href="#menu2-3">» ตรวจรับพัสดุ</p>
+            <ul class="collapse" id="menu2-3">
+              <li>
+                <a routerLink="/br01"> บร01 » รับพัสดุ » </a>
+                <a [routerLink]="['/report-tail', 'br01']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p data-toggle="collapse" href="#menu2-5">» กระบวนงานขยายเวลาเบิกจ่ายและกันเงินเหลื่อมปี ใบสั่งซื้อสั่งจ้าง</p>
+            <ul class="collapse" id="menu2-5">
+              <li><a routerLink="/os01"> อส01 » แสดงรายการ PO ขอขยายเบิกจ่าย-กันเหลื่อมปี (List) </a></li>
+              <li><a routerLink="/os02"> อส02 » ยกเลิกรายการ PO ขอขยายเบิกจ่าย-กันเหลื่อมปี (List Cancel) </a></li>
+              <li><a routerLink="/os04"> อส04 » เลือก PO จ้างเหมา-ไม่ใช่บุคคลธรรมดา < 100,000 </a></li>
+              <li><a routerLink="/os05"> อส05 » ยกเลิกเลือก PO จ้างเหมา-ไม่ใช่บุคคลธรรมดา < 100,000 </a></li>
+            </ul>
+          </li>
+          <li>
+            <p data-toggle="collapse" href="#menu2-6">» อนุมัติรายการใบสั่งซื้อสั่งจ้าง ขอขยายเบิกจ่าย-กันเหลื่อมปี</p>
+            <ul class="collapse" id="menu2-6">
+              <li><a routerLink="/os03"> อส03 » อนุมัติรายการใบสั่งซ้อจ้าง ขยายเบิกจ่ายกันเหลื่อมปี (Confirm) </a></li>
+            </ul>
+          </li>
+          <li>
+            <p data-toggle="collapse" href="#menu2-7">» กระบวนงานสลาย PO เงินกันเหลื่อมปี</p>
+            <ul class="collapse" id="menu2-7">
+              <li><a routerLink="/sl01"> สล01 » สลาย PO สร้างเอกสารสำรองเงิน PF </a></li>
+              <li><a routerLink="/sl02"> สล02 » สลาย PO เพื่อคืนเงินกันเหลื่อมปี </a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex menu-list">
+    <div class="menu-img">
+      <img src="assets/images/img_menuItems/menuitem2.jpg" alt="" />
+    </div>
+    <div class="menu-desc">
+      <div class="pointer" data-toggle="collapse" href="#menu3">
+        <p>ระบบเบิกจ่าย</p>
+        <span>
+          ขอเบิกเงิน,ขอจ่ายโดยส่วนราชการ,ขอถอนคืนรายได้,บันทึกรายการเงินประกัน,หนังสือรับรองภาษีหัก ณ ที่จ่าย,อนุมัติเบิก และอนุมัติจ่าย
+        </span>
+      </div>
+      <div class="collapse" id="menu3">
+        <ul>
+          <li>
+            <p data-toggle="collapse" href="#menu3-1">» ขอเบิกเงิน</p>
+            <ul class="collapse" id="menu3-1">
+              <li>
+                <a routerLink="/kb01"> ขบ01 » ขอเบิกเงินงบประมาณที่ต้องอ้างใบสั่งซื้อฯ » </a>
+                <a [routerLink]="['/report-tail', 'kb01']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+              <li>
+                <a routerLink="/kb02"> ขบ02 » ขอเบิกเงินงบประมาณที่ไม่อ้างใบสั่งซื้อฯ » </a>
+                <a [routerLink]="['/report-tail', 'kb02']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+              <li>
+                <a routerLink="/kb03"> ขบ03 » ขอเบิกเงินนอกงบประมาณที่ไม่อ้างใบสั่งซื้อฯ » </a>
+                <a [routerLink]="['/report-tail', 'kb03']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+              <li>
+                <a routerLink="/kb08"> ขบ08 » ขอเบิกเงินรายได้จัดสรร » </a>
+                <a [routerLink]="['/report-tail', 'kb08']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+              <li>
+                <a routerLink="/kb11"> ขบ11 » ขอเบิกเงินงบประมาณที่ต้องอ้างใบสั่งซื้อฯ การส่งมอบไม่แน่นอน » </a>
+                <a [routerLink]="['/report-tail', 'kb11']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+              <li>
+                <a routerLink="/tk01"> ทข01 » ขอเบิกเงินกู้อ้างอิงใบสั่งซื้อฯ » </a>
+                <a [routerLink]="['/report-tail', 'tk01']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+              <li>
+                <a routerLink="/tk02"> ทข02 » ขอเบิกเงินกู้ที่ไม่อ้างอิงใบสั่งซื้อฯ » </a>
+                <a [routerLink]="['/report-tail', 'tk02']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+              <li>
+                <a routerLink="/tk11"> ทข11 » ขอเบิกเงินกู้อ้างอิงใบสั่งซื้อฯ การส่งมอบไม่แน่นอน » </a>
+                <a [routerLink]="['/report-tail', 'tk11']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p data-toggle="collapse" href="#menu3-2">» ขอถอนคืนรายได้</p>
+            <ul class="collapse" id="menu3-2">
+              <li>
+                <a routerLink="/kb05"> ขบ05 » ขอถอนคืนรายได้ » </a>
+                <a [routerLink]="['/report-tail', 'kb05']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+              <li>
+                <a routerLink="/kb06"> ขบ06 » ขอถอนคืนรายได้เงินนอกงบประมาณ » </a>
+                <a [routerLink]="['/report-tail', 'kb06']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+              <li>
+                <a routerLink="/kb09"> ขบ09 » ขอถอนคืนรายได้แผ่นดินผ่านระบบ BAHTNET » </a>
+                <a [routerLink]="['/report-tail', 'kb09']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+              <li>
+                <a routerLink="/kb10"> ขบ10 » ขอถอนเงินจัดสรรให้ อปท. ผ่านระบบ BAHTNET » </a>
+                <a [routerLink]="['/report-tail', 'kb10']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p data-toggle="collapse" href="#menu3-3">» ขอจ่ายโดยส่วนราชการ</p>
+            <ul class="collapse" id="menu3-3">
+              <li>
+                <a routerLink="/kj05"> ขจ05 » บันทึกรายการจ่ายชำระเงิน » </a>
+                <a [routerLink]="['/report-tail', 'kj05']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p data-toggle="collapse" href="#menu3-5">» การบันทึกเบิกเกินส่งคืน/ล้างลูกหนี้เงินยืม/คืนเงินทดรองราชการ</p>
+            <ul class="collapse" id="menu3-5">
+              <li>
+                <a routerLink="/bc01"> บช01 » บันทึกรายการบัญชีแยกประเภท » </a>
+                <a [routerLink]="['/report-tail', 'bc01']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+              <li>
+                <a routerLink="/ns021a"> นส02-1 » นำส่งเงินแบบผ่านรายการ » </a>
+                <a [routerLink]="['/report-tail', 'ns021a']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+              <li>
+                <a routerLink="/ns022a"> นส02-2 » นำส่งเงินแบบพักรายการ » </a>
+                <a [routerLink]="['/report-tail', 'ns022a']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p data-toggle="collapse" href="#menu3-6">» อนุมัติรายการ</p>
+            <ul class="collapse" id="menu3-6">
+              <li><a routerLink="/om01"> อม01 » อนุมัติเอกสารขอเบิก » </a></li>
+              <li><a routerLink="/om02"> อม02 » อนุมัติเอกสารเพื่อสั่งจ่าย » </a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex menu-list">
+    <div class="menu-img">
+      <img src="assets/images/img_menuItems/menuitem3.jpg" alt="" />
+    </div>
+    <div class="menu-desc">
+      <div class="pointer" data-toggle="collapse" href="#menu4">
+        <p>ระบบรับและนำส่งรายได้</p>
+        <span> การรับเงินของหน่วยงาน,นำส่งเงินแบบผ่านรายการ,การรับเงินแบบแทนกัน และนำส่งเงินแบบพักรายการ </span>
+      </div>
+      <div class="collapse" id="menu4">
+        <ul>
+          <li>
+            <p data-toggle="collapse" href="#menu4-1">» จัดเก็บรายได้</p>
+            <ul class="collapse" id="menu4-1">
+              <li>
+                <a routerLink="/ns01"> นส01 » การรับเงินของหน่วยงาน » </a>
+                <a [routerLink]="['/report-tail', 'ns01']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+              <li>
+                <a routerLink="/ns03"> นส03 » การรับเงินแบบแทนกัน » </a>
+                <a [routerLink]="['/report-tail', 'ns03']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p data-toggle="collapse" href="#menu4-2">» นำส่งเงิน</p>
+            <ul class="collapse" id="menu4-2">
+              <li>
+                <a routerLink="/ns021"> นส02-1 » นำส่งเงินแบบผ่านรายการ » </a>
+                <a [routerLink]="['/report-tail', 'ns021']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+              <li>
+                <a routerLink="/ns022"> นส02-2 » นำส่งเงินแบบพักรายการ » </a>
+                <a [routerLink]="['/report-tail', 'ns022']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p data-toggle="collapse" href="#menu4-3">» บันทึกรายการเช็คขัดของ</p>
+            <ul class="collapse" id="menu4-3">
+              <li>
+                <a routerLink="/bc20"> บช20 » บันทึกรายการตั้งลูกหนี้เช็คขัดของ » </a>
+                <a [routerLink]="['/report-tail', 'bc20']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+              <li>
+                <a routerLink="/bc21"> บช21 » บันทึกรายการลดลูกหนี้เช็คขัดข้อง » </a>
+                <a [routerLink]="['/report-tail', 'bc21']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p data-toggle="collapse" href="#menu4-4">» อนุมัติรายการ</p>
+            <ul class="collapse" id="menu4-4">
+              <li><a routerLink="#"> อม03 » อนุมัติเอกสารนำส่ง » </a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex menu-list">
+    <div class="menu-img">
+      <img src="assets/images/img_menuItems/menuitem4.jpg" alt="" />
+    </div>
+    <div class="menu-desc">
+      <div class="pointer" data-toggle="collapse" href="#menu5">
+        <p>ระบบบัญชีแยกประเภท</p>
+        <span> รายการบัญชีแยกประเภททั่วไป,ค้างรับค้างจ่าย,ปรับเงินฝากคลัง พักเอกสาร,ปรับปรุงหมวดรายได้ และงบทดลอง </span>
+      </div>
+      <div class="collapse" id="menu5">
+        <ul>
+          <li>
+            <p data-toggle="collapse" href="#menu5-1">» บันทึก/ปรับปรุงรายการบัญชี</p>
+            <ul class="collapse" id="menu5-1">
+              <li>
+                <a routerLink="/bc01"> บช01 » บันทึกรายการบัญชีแยกประเภท » </a>
+                <a [routerLink]="['/report-tail', 'bc01']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+              <li>
+                <a routerLink="/bc01s"> บช01-2 » บันทึกรายการบัญชีแยกประเภท » </a>
+                <a [routerLink]="['/report-tail', 'bc01s']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+              <li>
+                <a routerLink="/bc02"> บช02 » บันทึกรายการปรับปรุงบัญชีค้างรับ-ค้างจ่าย » </a>
+                <a [routerLink]="['/report-tail', 'bc02']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+              <li>
+                <a routerLink="/bc04"> บช04 » บันทึกรายการบัญชี สำหรับเอกสารที่พักไว้ » </a>
+                <a [routerLink]="['/report-tail', 'bc04']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+              <li>
+                <a routerLink="/bc22"> บช22 » บันทึกรายการปรับปรุงบัญชีบัตรภาษี » </a>
+                <a [routerLink]="['/report-tail', 'bc22']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+            </ul>
+          </li>
+          <!-- <li>
+            <p data-toggle="collapse" href="#menu5-2">» ปรับปรุงหมวดรายจ่าย</p>
+            <ul class="collapse" id="menu5-2">
+              <li>
+                <a routerLink="/bc07"> บช07 » ปรับปรุงหมวดรายจ่าย » </a>
+                <a [routerLink]="['/report-tail', 'bc07']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+            </ul>
+          </li> -->
+          <li>
+            <p data-toggle="collapse" href="#menu5-3">» การนำเข้าข้อมูลงบทดลอง</p>
+            <ul class="collapse" id="menu5-3">
+              <li>
+                <a routerLink="/bc05"> บช05 » งบทดลอง - หน่วยงานอิสระและองค์กรมหาชน » </a>
+                <a [routerLink]="['/report-tail', 'bc05']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+              <li>
+                <a routerLink="/bc08"> บช08 » งบทดลอง - หน่วยงานต่างประเทศ » </a>
+                <a [routerLink]="['/report-tail', 'bc08']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+              <li>
+                <a routerLink="/bc10"> บช10 » งบทดลอง - โรงพยาบาลสังกัด สป.สธ. ที่เป็นหน่วยเบิกจ่าย » </a>
+                <a [routerLink]="['/report-tail', 'bc10']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+              <li>
+                <a routerLink="/bc11"> บช11 » งบทดลอง - เงินนอกงบประมาณของส่วนราชการ » </a>
+                <a [routerLink]="['/report-tail', 'bc11']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p data-toggle="collapse" href="#menu5-4">» รับย้ายจ่ายย้าย</p>
+            <ul class="collapse" id="menu5-4">
+              <li>
+                <a routerLink="/bc12"> บช12 » บันทึกรายการจ่ายย้ายเงินคงคลัง » </a>
+                <a [routerLink]="['/report-tail', 'bc12']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+              <li>
+                <a routerLink="/bc13"> บช13 » บันทึกรายการรับย้ายเงินคงคลัง » </a>
+                <a [routerLink]="['/report-tail', 'bc13']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+              <li>
+                <a routerLink="/bc14"> บช14 » บันทึกรายการการจ่ายแลกเหรียญกษาปณ์เงินคงคลัง » </a>
+                <a [routerLink]="['/report-tail', 'bc14']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p data-toggle="collapse" href="#menu5-5">» โอนขายบิลแบบมีหนี้ภายในกรม - บำเหน็จบำนาญข้าราชการ</p>
+            <ul class="collapse" id="menu5-5">
+              <li>
+                <a routerLink="/bc04"> บช04 » บันทึกรายการบัญชี สำหรับเอกสารที่พักไว้ » </a>
+                <a [routerLink]="['/report-tail', 'bc04']"> <img src="assets/images/icon/report_v10.gif" alt="report" /> </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex menu-list">
+    <div class="menu-img">
+      <img src="assets/images/img_menuItems/menuitem8.jpg" alt="" />
+    </div>
+    <div class="menu-desc">
+      <div class="pointer" data-toggle="collapse" href="#menu6">
+        <p>ระบบบัญชีสินทรัพย์ถาวร</p>
+        <span> ข้อมูลหลักสินทรัพย์,บันทึกรายการสินทรัพย์ และกลับรายการสินทรัพย์ </span>
+      </div>
+      <div class="collapse" id="menu6">
+        <ul>
+          <li>
+            <p data-toggle="collapse" href="#menu6-1">» ข้อมูลหลักสินทรัพย์</p>
+            <ul class="collapse" id="menu6-1">
+              <li><a routerLink="/st01"> สท01 » สินทรัพย์ » </a></li>
+              <li><a routerLink="/st11"> สท11 » สินทรัพย์ย่อย » </a></li>
+              <li><a routerLink="#"> สท12 » รายงานสินทรัพย์รายตัว » </a></li>
+            </ul>
+          </li>
+          <li>
+            <p data-toggle="collapse" href="#menu6-2">» บันทึกรายการสินทรัพย์</p>
+            <ul class="collapse" id="menu6-2">
+              <li><a routerLink="#"> สท13 » ผ่านรายการด้วยการหักล้าง » </a></li>
+              <li><a routerLink="#"> สท14 » การกำหนดกฎกระจายการโอน » </a></li>
+              <li><a routerLink="#"> สท15 » การชำระบัญชีสินทรัพย์ระหว่างก่อสร้าง » </a></li>
+              <li><a routerLink="#"> สท16 » การบันทึกรับสินทรัพย์บริจาค » </a></li>
+              <li><a routerLink="#"> สท17 » การโอนภายในหน่วยเบิกจ่าย » </a></li>
+              <li><a routerLink="#"> สท18 » การตัดจำหน่ายสินทรัพย์ » </a></li>
+            </ul>
+          </li>
+          <li>
+            <p data-toggle="collapse" href="#menu6-3">» กลับรายการสินทรัพย์</p>
+            <ul class="collapse" id="menu6-3">
+              <li><a routerLink="#"> สท19 » กลับรายการของเอกสารสินทรัพย์ (ใช้กลับรายการเอกสาร สท16, สท17, สท18) » </a></li>
+              <li><a routerLink="#"> สท20 » กลับรายการของการชำระบัญชีของ AuC (ใช้กลับรายการเอกสาร สท15) » </a></li>
+              <li><a routerLink="#"> สท21 » รีเซ็ตรายการหักล้างใหม่ (ใช้กลับรายการเอกสารหักล้าง สท13) » </a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

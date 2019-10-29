@@ -1,0 +1,425 @@
+<div class="content-box" [ngClass]="{ 'label-for-search': isDisabledFromSearch }">
+  <div class="content-detail mb-4" *ngIf="isDisabledFromSearch">
+    <div class="row">
+      <div class="col-12 col-md-2"><label class="text-black"> เลขที่ใบบันทึกรายการบัญชี </label></div>
+      <div class="col-12 col-md-4">
+        <p>
+          {{ accountDocNo }} <span class="ml-3"> {{ accountDocNoFiscYear }} </span>
+        </p>
+      </div>
+      <div class="col-12 col-md-2"><label class="text-black"> เลขที่เอกสารกลับรายการ </label></div>
+      <div class="col-12 col-md-4">
+        <p>
+          {{ reverseDocNo }} <span class="ml-3"> {{ reverseDocNoFiscYear }} </span>
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-2"><label class="text-black"> ผู้บันทึกรายการ </label></div>
+      <div class="col-12 col-md-4">
+        <p>{{ createBy }}</p>
+      </div>
+    </div>
+  </div>
+  <form [formGroup]="ns031FormCreate" [ngClass]="{ 'submited-form': isSubmitedForm }">
+    <div class="content-detail mb-4">
+      <div class="row">
+        <div class="col-12 col-md-2">
+          <label class="text-underline-blue"> รหัสหน่วยงาน </label>
+        </div>
+        <div class="col-12 col-md-4">
+          <input class="form-control input-none-border" type="text" formControlName="departmentCode" />
+          <p>{{ userProfile?.userdata?.departmentName }}</p>
+        </div>
+        <div class="col-12 col-md-2 ">
+          <label class="text-underline-blue"> ประจำวันที่ </label>
+        </div>
+        <div class="col-12 col-md-4">
+          <mat-form-field class="d-flex">
+            <input formControlName="dailyDate" readonly class="form-control date-mat-input" matInput [matDatepicker]="documentDate" />
+            <mat-datepicker-toggle matSuffix [for]="documentDate"></mat-datepicker-toggle>
+            <mat-datepicker #documentDate></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-2">
+          <label class="text-underline-blue"> รหัสพื้นที่ </label>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <select class="form-control disabled" formControlName="areaCode">
+            <option *ngFor="let item of constant.LIST_AREA_CODE" [ngValue]="item.valueCode">{{ item.valueCode }} - {{
+              item.name }}</option>
+          </select>
+        </div>
+        <div class="col-12 col-md-2"><label> งวด </label></div>
+        <div class="col-md-3"> <input *ngIf="utils.fisc_period.length === 1" class="input-none-border" type="text"
+            formControlName="fiscPeriod" />
+          <select class="form-control " *ngIf="utils.fisc_period.length > 1" formControlName="fiscPeriod">
+            <option *ngFor="let item of utils.fisc_period" [ngValue]="item">{{ item }}</option>
+          </select>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-2">
+          <label class="text-underline-blue"> รหัสหน่วยเบิกจ่าย </label>
+        </div>
+        <div class="col-12 col-md-4">
+          <input class="form-control input-none-border" type="text" formControlName="disbursementCode" />
+          <p>{{ userProfile?.userdata?.divisionName }}</p>
+        </div>
+        <div class="col-12 col-md-2">
+          <label class="text-underline-blue"> ประเภทการรับเงิน </label>
+        </div>
+        <div class="col-12 col-md-4">
+
+          <select class="form-control " formControlName="typeReceive" (ngModelChange)="onTypeReceiveChange($event)">
+            <option *ngFor="let item of constant.LIST_TYPE_RECEIVE_MONEY_NS03" [ngValue]="item.id">{{ item.name
+              }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-2">
+          <label class="text-underline-red"> การอ้างอิง </label>
+        </div>
+        <div class="col-12 col-md-4">
+          <input type="text" formControlName="reference" class="form-control" maxlength="16" />
+        </div>
+        <div class="col-12 col-md-2">
+          <label class="text-underline-green"> ดึงข้อมูลจากไฟล์ </label>
+        </div>
+        <div class="col-12 col-md-4">
+          <a href="#" class="text-green-light"> แนบไฟล์ </a>
+        </div>
+      </div>
+    </div>
+    <mat-tab-group class="row-border" #tabRef [(selectedIndex)]="tabSelectedIndex" (selectedTabChange)="tabChanged($event)">
+      <mat-tab label="ข้อมูลทั่วไป">
+        <div class="row">
+          <div class="col-md-12 bg-secondcolor">
+            <label class="text-black"> <strong> รายละเอียดสถานะเงินที่รับ </strong> </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-2">
+            <label class="text-underline-blue"> ประเภทเงิน </label>
+          </div>
+          <div class="col-12 col-md-4">
+
+            <select class="form-control " formControlName="typeMoney" (ngModelChange)="onTypeMoneyChange($event)">
+              <option *ngFor="let item of constant.LIST_TYPE_MONEY_NS03" [ngValue]="item.id">{{ item.name
+                }}</option>
+            </select>
+          </div>
+          <div *ngIf=" isDisabledFromTypeReceive" class="col-md-2">
+            <label class="text-underline-red"> Bank Book </label>
+          </div>
+          <div *ngIf="  isDisabledFromTypeReceive" class="col-md-4">
+            <div class="input-group">
+              <input class="form-control" formControlName="bankBook" type="text" maxlength="10" (blur)="onBlurSearch('bankBook')" />
+              <div class="input-group-append button-group-search">
+                <button class="btn btn-info" (click)="openDialogSearch('bankBook')" type="button">
+                  <img src="assets/images/icon/fa-search.svg" width="12px" />
+                </button>
+              </div>
+            </div>
+            {{ bankBookBidingName }}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-md-2">
+            <label class="text-underline-red"> แหล่งของเงิน </label>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="d-flex input-group input-with-year">
+              <div class="input-group">
+                <select class="form-control" formControlName="yearSourceMoney">
+                  <option *ngFor="let item of constant.LIST_YEAR" [ngValue]="item.id">{{ item.name }}</option>
+                </select>
+                <input class="form-control " formControlName="sourceMoneyCode" type="text" maxlength="7" />
+                <div class="input-group-append button-group-search">
+                  <button class="btn btn-info" (click)="openDialogSearch('sourceMoneyCode')" type="button">
+                    <img src="assets/images/icon/fa-search.svg" width="12px" />
+                  </button>
+                </div>
+              </div>
+              {{ sourceMoneyCodeBindindName }}
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            <label class="text-underline-red"> จำนวนเงิน </label>
+          </div>
+          <div class="col-md-4">
+            <div class="d-flex input-with-unit">
+              <input formControlName="amountMoneyDebit" class="form-control" appCurrency type="text" />
+              <span> บาท </span>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-12 bg-secondcolor">
+            <label class="text-black"> <strong> ข้อมูลหน่วยงาน </strong> </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            <label class="text-underline-blue"> รหัสศูนย์ต้นทุนผู้จัดเก็บ </label>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group">
+              <input class="form-control" formControlName="centerCode" type="text" maxlength="10" (blur)="onBlurSearch('centerCode')" />
+              <div class="input-group-append button-group-search">
+                <button class="btn btn-info" (click)="openDialogSearch('centerCode')" type="button">
+                  <img src="assets/images/icon/fa-search.svg" width="12px" />
+                </button>
+              </div>
+            </div>
+            {{ centerCodeBindingName }}
+          </div>
+          <div class="col-md-2">
+            <label class="text-underline-blue"> 	รหัสศูนย์ต้นทุนเจ้าของรายได้ </label>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group">
+              <input class="form-control" formControlName="ownCenterCode" type="text" maxlength="10" (blur)="onBlurSearch('ownCenterCode')" />
+              <div class="input-group-append button-group-search">
+                <button class="btn btn-info" (click)="openDialogSearch('ownCenterCode')" type="button">
+                  <img src="assets/images/icon/fa-search.svg" width="12px" />
+                </button>
+              </div>
+            </div>
+            {{ ownCenterCodeBindingName }}
+          </div>
+        </div>
+
+        <div class="row">
+          <div *ngIf="!isDisabledFromTypeMoney" class="col-12 col-md-2">
+            <label class="text-underline-red"> รหัสรายได้ </label>
+          </div>
+          <div *ngIf="!isDisabledFromTypeMoney" class="col-12 col-md-4">
+            <div class="input-group">
+              <input class="form-control " formControlName="incomeCode" type="text" maxlength="7" (blur)="onBlurSearch('incomeCode')" />
+              <div class="input-group-append button-group-search">
+                <button class="btn btn-info" (click)="openDialogSearch('incomeCode')" type="button">
+                  <img src="assets/images/icon/fa-search.svg" width="12px" />
+                </button>
+              </div>
+            </div>
+            {{incomeBindingName}}
+          </div>
+          <div *ngIf="isDisabledFromTypeMoney" class="col-12 col-md-2">
+            <label class="text-underline-red"> รหัสบัญชีเงินฝากคลัง (3หลักท้าย) </label>
+          </div>
+          <div *ngIf="isDisabledFromTypeMoney" class="col-12 col-md-4">
+            <div class="input-group">
+              <input class="form-control " formControlName="digitAccountDeposit" type="text" maxlength="3" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 bg-secondcolor">
+            <label class="text-black"> <strong> คำอธิบายเอกสาร </strong> </label>
+          </div>
+        </div>
+        <div class="row mx-auto">
+          <div class="col-12 col-md-8">
+            <textarea formControlName="descriptionDocument" class="form-control" rows="5"></textarea>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="รายการจัดเก็บ">
+        <div class="header-collapse" [ngClass]="{ open: isOpenCollapseDetail }">
+          <div class="flex-1">
+            รายละเอียดเอกสาร
+            <img (click)="openCollapseDetail()" class="pointer" src="assets/images/icon/collapse.gif" />
+          </div>
+          <div *ngIf="isSelectOrder">
+            <span class="pointer" [ngClass]="{ disabled: selectListOrder === 1 }" (click)="clickSelectOrderList('prev')">
+              « ก่อนหน้า </span>
+            <span> {{ selectListOrder }} / {{ listDocument.length }} </span>
+            <span class="pointer" [ngClass]="{ disabled: selectListOrder === listDocument.length }" (click)="clickSelectOrderList('next')">
+              ถัดไป »
+            </span>
+          </div>
+        </div>
+        <div class="collapse-detail" [ngClass]="{ show: isOpenCollapseDetail }">
+          <div class="row">
+            <div class="col-md-2">
+              <label> ลำดับที่ {{documentNo}} </label>
+            </div>
+            <div class="col-md-4"></div>
+
+          </div>
+          <div class="row">
+
+            <div class="col-md-2">
+              <label class="text-underline-red"> รหัสบัญชีแยกประเภท</label>
+            </div>
+            <div class="col-md-4">
+              <div class="input-group">
+                <input class="form-control" formControlName="typeAccountCode" type="text" maxlength="10" (blur)="onBlurSearch('typeAccountCode')" />
+                <div class="input-group-append button-group-search">
+                  <button class="btn btn-info" (click)="openDialogSearch('typeAccountCode')" type="button">
+                    <img src="assets/images/icon/fa-search.svg" width="12px" />
+                  </button>
+                </div>
+              </div>
+              {{ typeAccountCodeBindingName }}
+            </div>
+          </div>
+          <div *ngIf="isDisabledFromTypeMoney" class="row">
+            <div class="col-12 col-md-2">
+              <label class="text-underline-green"> รหัสบัญชีเงินฝากคลัง </label>
+            </div>
+            <div class="col-12 col-md-4">
+              <div class="input-group">
+                <input class="form-control" type="text" formControlName="accountDepositCode" maxlength="7" (blur)="onBlurSearch('accountDepositCode')" />
+                <div class="input-group-append button-group-search">
+                  <button class="btn btn-info" (click)="openDialogSearch('accountDepositCode')" type="button">
+                    <img src="assets/images/icon/fa-search.svg" width="12px" />
+                  </button>
+                </div>
+              </div>
+              {{ accountDepositCodeBindingName }}
+            </div>
+            <div class="col-12 col-md-2">
+              <label class="text-underline-green"> รหัสเจ้าของบัญชีเงินฝากคลัง
+              </label>
+            </div>
+            <div class="col-12 col-md-4">
+              <input class="form-control " type="text" formControlName="ownAccountDepositCode" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <label class="text-underline-red"> จำนวนเงิน </label>
+            </div>
+            <div class="col-md-4">
+              <div class="d-flex input-with-unit">
+                <input formControlName="amountMoneyCredit" class="form-control" appCurrency type="text" />
+                <span> บาท </span>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <label class="text-underline-green"> รหัสหน่วยงานคู่ค้า (Trading Partner) </label>
+            </div>
+            <div class="col-md-4">
+              <input formControlName="tradingPartnerCode" class="form-control " type="text" maxlength="5" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <label class="text-underline-green"> รายละเอียดบรรทัดรายการ </label>
+            </div>
+            <div class="col-md-4">
+              <input formControlName="detail" class="form-control " type="text" maxlength="50" />
+            </div>
+          </div>
+
+          <div *ngIf="!isDisabledFromSearch" class="row mx-auto border-t-black mt-5">
+            <div class="mx-auto mt-3">
+              <button type="button" class="btn-primary" (click)="keepOrder(ns011FormCreate.value)">จัดเก็บรายการนี้ลงตาราง</button>
+              <button [disabled]="isBtnDelete" (click)="deleteOrder()" class="btn-danger" type="button">ลบข้อมูลรายการนี้</button>
+              <button [disabled]="isBtnNew" class="btn-light" type="button" (click)="createNewOrder(ns011FormCreate.value)">
+                สร้างข้อมูลรายการใหม่
+              </button>
+            </div>
+          </div>
+          <div class="mt-4" *ngIf="listDocument.length > 0 && listDocument != null">
+            <table class="table-result">
+              <tr>
+                <th>เลือก</th>
+                <th class="sort">ลำดับที่</th>
+
+                <th class="sort">ชื่อบัญชี</th>
+                <th class="sort">รหัสบัญชีแยกประเภท</th>
+                <th class="sort">รายละเอียดเพิ่มเติม</th>
+
+                <th class="sort">จำนวนเงิน(บาท)</th>
+              </tr>
+              <tbody>
+                <tr *ngFor="let item of listDocument | paginate: { itemsPerPage: constant.PER_PAGINATION, currentPage: p }; let i = index"
+                  [ngClass]="{ selected: selectListOrder === i + 1 }">
+                  <td align="center">
+                    <img src="assets/images/icon/record.gif" class="icon pointer" (click)="selectDocument(item, i)" />
+                  </td>
+                  <td>{{ ((p - 1) * constant.PER_PAGINATION) + (i + 1) }}</td>
+
+                  <td>{{ item.typeAccountName }}</td>
+                  <td>{{ item.typeAccountCode }}</td>
+
+                  <td>{{ item.detail }}</td>
+                  <td>{{ item.amountMoneyCredit | number: '1.2-2' }}</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="4"></td>
+                  <td class="summary">จำนวนเงินจัดเก็บ</td>
+                  <td class="summary-result text-right">{{ totalPrice | number: '1.2-2' }}</td>
+                </tr>
+
+              </tfoot>
+            </table>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            <!-- <span [hidden]="isDisabledButtonFromSearch"> คำอธิบาย: <img src="assets/images/icon/record.gif" class="icon" />
+          คลิกเพื่อลบเอกสาร </span> -->
+            <!-- <div class="mx-auto text-center">
+            <button *ngIf="listDocument.length>0" class="position-relative mr-5" (click)="openDialogTaxFee()">
+              {{ constant.BUTTON.tax_input }}
+              <div *ngIf="isTaxInputApply" class="icon-status apply-icon-success"></div>
+              <div *ngIf="!isTaxInputApply" class="icon-status apply-icon-unsuccess"></div>
+            </button>
+          </div> -->
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+    <ul style="color:red">
+      <li *ngFor="let c of listValidate">{{ c }}</li>
+    </ul>
+    <div *ngIf="isDisabledFromSearch" class="row mx-auto mt-3 border-t-black pb-100">
+      <div class="mx-auto d-flex">
+        <button type="button" class="btn-primary" (click)="newDocumentFromSearch()">สร้างเอกสารใหม่</button>
+        <div class="dropdown">
+          <button class="btn-info" type="button" id="printDocument" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            พิมพ์รายงาน
+          </button>
+          <div class="dropdown-menu" aria-labelledby="printDocument">
+            <p class="dropdown-item" (click)="printReport('pdf')">PDF</p>
+            <p class="dropdown-item" (click)="printReport('xls')">XLS</p>
+            <p class="dropdown-item" (click)="printReport('doc')">DOC</p>
+          </div>
+        </div>
+        <button type="button" class="btn-info">Log</button>
+      </div>
+    </div>
+    <div class="row mx-auto">
+      <div class="mx-auto">
+        <button type="button" class="btn-success" (click)="openDialogPreSave()">จำลองการบันทึก</button>
+      </div>
+    </div>
+    <div class="d-flex my-4">
+      <div class="tab-button prev" *ngIf="tabSelectedIndex != 0">
+        <button class="button" (click)="checkTab('prev')">
+          <span class="arrow"></span>
+          ก่อนหน้า
+        </button>
+      </div>
+      <div class="tab-button next" *ngIf="!((tabSelectedIndex + 1) == tabAmount)">
+        <button class="button" (click)="checkTab('next')"> ถัดไป
+          <span class="arrow"></span>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+<app-loading class="backdrop-loading" [isLoading]="isLoading"></app-loading>

@@ -1,0 +1,58 @@
+<div mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" class="cursor-scroll">
+  <form [formGroup]="dialogTaxFeeForm" [ngClass]="{ 'submited-form': idSubmitedForm }">
+    <mat-dialog-content>
+      <mat-form-field>
+        <div class="header-dialog topic" cdkDragHandle>
+          <label class="text-black"> ระบุภาษีหัก ณ ที่จ่าย / ค่าปรับ </label>
+          <button type="button" class="close" (click)="onNoClick()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="content-dialog">
+          <table class="table-normal table-set-tax">
+            <tr>
+              <th colspan="2">ภาษีหัก ณ ที่จ่าย / ค่าปรับ</th>
+              <th> ฐานการคำนวน </th>
+              <th> จำนวนเงินทที่หักไว้ </th>
+            </tr>
+            <tr>
+              <td> <label class="text-underline-blue"> ภาษีเงินได้ </label> </td>
+              <td>
+                <div class="d-flex radio-inline">
+                  <input type="radio" formControlName="typeTax" value="11" name="typeTax" id="individual" />
+                  <span for="web_online">บุคคลธรรมดา </span>
+                  <input type="radio" formControlName="typeTax" value="10" name="typeTax" id="legalEntity" />
+                  <span for="legalEntity"> นิติบุคคล </span>
+
+                </div>
+              </td>
+              <td> <input type="text" formControlName="taxBaseCaculate" class="form-control"> </td>
+              <td> <input type="text" formControlName="valueTax" class="form-control"> </td>
+            </tr>
+            <tr>
+              <td> <label class="text-underline-blue"> ค่าปรับ </label> </td>
+              <td>
+                <div *ngIf="data.type === '1'" class="d-flex radio-inline">
+                  <input type="radio" formControlName="typeFee" value="01" name="typeFee" id="nationalIncome" />
+                  <span for="nationalIncome"> รายได้ของแผ่นดิน </span>
+                  <input type="radio" formControlName="typeFee" value="02" name="typeFee" id="agencyRevenue" />
+                  <span for="agencyRevenue"> รายได้ของหน่วยงาน </span>
+                </div>
+              </td>
+              <td> <input type="text" formControlName="feeBaseCaculate" class="form-control"> </td>
+              <td> <input type="text" formControlName="valueFee" class="form-control"> </td>
+            </tr>
+          </table>
+          <ul style="color:red">
+            <li *ngFor="let c of listValidate">{{ c }}</li>
+          </ul>
+        </div>
+      </mat-form-field>
+    </mat-dialog-content>
+  </form>
+  <div class="modal-footer" mat-dialog-actions>
+    <button class="btn-success" (click)="onClickSave()">ตกลง</button>
+    <button (click)="onNoClick()">กลับ</button>
+  </div>
+</div>
+<app-loading class="backdrop-loading" [isLoading]="isLoading"></app-loading>

@@ -1,0 +1,39 @@
+<div mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" class="cursor-scroll">
+  <form [formGroup]="dialogTaxForm" [ngClass]="{ 'submited-form': idSubmitedForm }">
+    <mat-dialog-content>
+      <mat-form-field>
+        <div class="header-dialog topic" cdkDragHandle>
+          <label class="text-black"> ระบุภาษีตามเงื่อนไข ภาษีจากการจัดซื้อ(%) </label>
+          <button type="button" class="close" (click)="onNoClick()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="content-dialog overflow-y max-h-400">
+          <div class="row">
+            <div class="col-12 col-md-3">
+              <label class="text-underline-blue"> ประเภทภาษี </label>
+            </div>
+            <div class="col-12 col-md-9">
+              <select class="form-control" formControlName="typeTax">
+                <option *ngFor="let item of constant.LIST_TYPE_TAX" [ngValue]="item.id">{{ item.name }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-3">
+              <label class="text-underline-green"> มูคค่าภาษี </label>
+            </div>
+            <div class="col-12 col-md-9">
+              <input type="text" class="form-control text-right" formControlName="valueTax" appCurrency maxlength="15">
+            </div>
+          </div>
+        </div>
+      </mat-form-field>
+    </mat-dialog-content>
+  </form>
+  <div class="modal-footer" mat-dialog-actions>
+    <button class="btn-success" (click)="onClickSave()">บันทึกข้อมูล</button>
+    <button (click)="onNoClick()">กลับ</button>
+  </div>
+</div>
+<app-loading class="backdrop-loading" [isLoading]="isLoading"></app-loading>

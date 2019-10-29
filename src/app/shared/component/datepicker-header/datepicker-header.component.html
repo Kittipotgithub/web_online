@@ -1,0 +1,15 @@
+<div class="datepicker-header">
+  <button mat-icon-button class="datepicker-double-arrow" (click)="previousClicked('year')">
+    <span> << </span>
+  </button>
+  <button mat-icon-button (click)="previousClicked('month')">
+    <span> < </span>
+  </button>
+  <span class="datepicker-header-label">{{periodLabel}}</span>
+  <button mat-icon-button (click)="nextClicked('month')">
+    <span> > </span>
+  </button>
+  <button mat-icon-button class="datepicker-double-arrow" (click)="nextClicked('year')">
+    <span> >> </span>
+  </button>
+</div>

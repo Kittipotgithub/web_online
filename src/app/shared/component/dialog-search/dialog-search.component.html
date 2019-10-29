@@ -1,0 +1,208 @@
+<div mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" class="cursor-scroll">
+  <mat-dialog-content>
+    <mat-form-field>
+      <div class="header-dialog topic" cdkDragHandle>
+        <label for=""> {{ title }} </label>
+        <button type="button" class="close" (click)="onNoClick()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="content-dialog overflow-y max-h-400">
+        <div class="form-search row">
+          <div class="col-12 col-md-2 text-right">
+            <label for=""> ค้นหา </label>
+          </div>
+          <div class="col-12 col-md-7">
+            <input type="text" class="form-control" #searchValue />
+            <p class="text-red">{{ errorMessage }}</p>
+          </div>
+          <div class="col-12 col-md-3">
+            <button (click)="search(searchValue)" class="btn-info">ค้นหา</button>
+            <img src="assets/images/icon/question.png" />
+          </div>
+        </div>
+        <div class="form-result" *ngIf="dataSource.length > 0">
+          <table class="table-normal table-search">
+            <tr>
+              <th *ngFor="let header of dataSourceHeader">{{ header }}</th>
+            </tr>
+            <tbody *ngIf="searchType === 'typeAccountCode'">
+              <tr *ngFor="let data of dataSource">
+                <td><span class="chooseDataSearch" (click)="chooseDataSearch(data.value, data.name)"> เลือก </span></td>
+                <td>{{ data.value }}</td>
+                <td class="text-left">{{ data.name }}</td>
+                <td class="text-left">{{ data.description }}</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="searchType === 'centerCode'">
+              <tr *ngFor="let data of dataSource">
+                <td><span class="chooseDataSearch" (click)="chooseDataSearch(data.bgFundCenter, data.name)"> เลือก </span></td>
+                <td>{{ data.bgFundCenter }}</td>
+                <td class="text-left">{{ data.name }}</td>
+                <td class="text-left">{{ data.description }}</td>
+                <td>{{ data.companyCode }}</td>
+                <td>{{ data.bgPaymentCenter }}</td>
+                <td>1000</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="searchType === 'ownCenterCode'">
+              <tr *ngFor="let data of dataSource">
+                <td><span class="chooseDataSearch" (click)="chooseDataSearch(data.bgFundCenter, data.name)"> เลือก </span></td>
+                <td>{{ data.bgFundCenter }}</td>
+                <td class="text-left">{{ data.name }}</td>
+                <td class="text-left">{{ data.description }}</td>
+                <td>{{ data.companyCode }}</td>
+                <td>{{ data.bgPaymentCenter }}</td>
+                <td>1000</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="searchType === 'areaCode'">
+              <tr *ngFor="let data of dataSource">
+                <td><span class="chooseDataSearch" (click)="chooseDataSearch(data.valueCode, data.name)"> เลือก </span></td>
+                <td>{{ data.valueCode }}</td>
+                <td class="text-left">{{ data.name }}</td>
+                <td class="text-left">{{ data.description }}</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="searchType === 'sourceMoneyCode'">
+              <tr *ngFor="let data of dataSource">
+                <td><span class="chooseDataSearch" (click)="chooseDataSearch(data.valueCode, data.name)"> เลือก </span></td>
+                <td>{{ data.valueCode }}</td>
+                <td class="text-left">{{ data.name }}</td>
+                <td class="text-left">{{ data.description }}</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="searchType === 'sourceBudgetCode'">
+              <tr *ngFor="let data of dataSource">
+                <td><span class="chooseDataSearch" (click)="chooseDataSearch(data.valueCode, data.name)"> เลือก </span></td>
+                <td>{{ data.valueCode }}</td>
+                <td class="text-left">{{ data.description }}</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="searchType === 'mainActivityCode'">
+              <tr *ngFor="let data of dataSource">
+                <td><span class="chooseDataSearch" (click)="chooseDataSearch(data.valueCode, data.name)"> เลือก </span></td>
+                <td>{{ data.valueCode }}</td>
+                <td class="text-left">{{ data.name }}</td>
+                <td class="text-left">{{ data.description }}</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="searchType === 'subActivityCode'">
+              <tr *ngFor="let data of dataSource">
+                <td><span class="chooseDataSearch" (click)="chooseDataSearch(data.valueCode, data.name)"> เลือก </span></td>
+                <td>{{ data.valueCode }}</td>
+                <td class="text-left">{{ data.name }}</td>
+                <td class="text-left">{{ data.description }}</td>
+                <td>{{ data.companyCode }}</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="searchType === 'subAccountCode'">
+              <tr *ngFor="let data of dataSource">
+                <td>
+                  <span class="chooseDataSearch" (click)="chooseDataSearch(data.valueCode, data.name, data.subAccountOwner)"> เลือก </span>
+                </td>
+                <td>{{ data.subAccountOwner }}</td>
+                <td>{{ data.valueCode }}</td>
+                <td class="text-left">{{ data.name }}</td>
+                <td>{{ data.caSubAccountCategory }}</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="searchType === 'packageCode'">
+              <tr *ngFor="let data of dataSource">
+                <td><span class="chooseDataSearch" (click)="chooseDataSearch(data.valueCode, data.name)"> เลือก </span></td>
+                <td>{{ data.valueCode }}</td>
+                <td class="text-left">{{ data.name }}</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="searchType === 'branchNo'">
+              <tr *ngFor="let data of dataSource">
+                <td><span class="chooseDataSearch" (click)="chooseDataSearch(data.routingNo, data.name)"> เลือก </span></td>
+                <td>{{ data.routingNo }}</td>
+                <td class="text-left">{{ data.name }}</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="searchType === 'accountDepositCode'">
+              <tr *ngFor="let data of dataSource">
+                <td>
+                  <span class="chooseDataSearch" (click)="chooseDataSearch(data.valueCode, data.name, data.depositAccountOwner)">
+                    เลือก
+                  </span>
+                </td>
+                <td>{{ data.depositAccountOwner }}</td>
+                <td>{{ data.valueCode }}</td>
+                <td class="text-left">{{ data.name }}</td>
+                <td>{{ data.areaCode }}</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="searchType === 'gpscCode'">
+              <tr *ngFor="let data of dataSource">
+                <td><span class="chooseDataSearch" (click)="chooseDataSearch(data.valueCode, data.name)"> เลือก </span></td>
+                <td>{{ data.valueCode }}</td>
+                <td class="text-left">{{ data.name }}</td>
+                <td>{{ data.gpscGroup }}</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="searchType === 'vendorTaxId'">
+              <tr *ngFor="let data of dataSource">
+                <td><span class="chooseDataSearch" (click)="chooseDataSearch(data.taxId, data.name)"> เลือก </span></td>
+                <td>{{ data.taxId }}</td>
+                <td>{{ data.valueCode }}</td>
+                <td class="text-left">{{ data.name }}</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="searchType === 'vendorBankAccount'">
+              <tr *ngFor="let data of dataSource">
+                <td><span class="chooseDataSearch" (click)="chooseDataSearch(data.bankAccountNo, data.name)"> เลือก </span></td>
+                <td>{{ data.bankAccountNo }}</td>
+                <td>{{ data.branch.bank }}</td>
+                <td>-</td>
+                <td>{{ data.vendor.valueCode }}</td>
+                <td>{{ data.vendor.taxId }}</td>
+                <td class="text-left">{{ data.vendor.name }}</td>
+                <td>-</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="searchType === 'assetCode'">
+              <tr *ngFor="let data of dataSource">
+                <td><span class="chooseDataSearch" (click)="chooseDataSearch(data.valueCode, data.description)"> เลือก </span></td>
+                <td>{{ data.valueCode }}</td>
+                <td class="text-left">{{ data.description }}</td>
+                <td class="text-left">{{ data.help }}</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="searchType === 'unit'">
+              <tr *ngFor="let data of dataSource">
+                <td><span class="chooseDataSearch" (click)="chooseDataSearch(data.valueCode, data.description)"> เลือก </span></td>
+                <td>{{ data.valueCode }}</td>
+                <td class="text-left">{{ data.description }}</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="searchType === 'incomeCode'">
+              <tr *ngFor="let data of dataSource">
+                <td><span class="chooseDataSearch" (click)="chooseDataSearch(data.valueCode, data.name)"> เลือก </span></td>
+                <td>{{ data.valueCode }}</td>
+                <td class="text-left">{{ data.name }}</td>
+                <td class="text-left">{{ data.description }}</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="searchType === 'bankBook'">
+              <tr *ngFor="let data of dataSource">
+                <td><span class="chooseDataSearch" (click)="chooseDataSearch(data.valueCode, data.name)"> เลือก </span></td>
+                <td>{{ data.valueCode }}</td>
+                <td class="text-left">{{ data.name }}</td>
+                <td class="text-left">{{ data.description }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </mat-form-field>
+  </mat-dialog-content>
+  <div class="modal-footer" mat-dialog-actions>
+    <button (click)="onNoClick()">ปิด</button>
+  </div>
+</div>
+<app-loading class="backdrop-loading" [isLoading]="isLoading"></app-loading>
